@@ -25,6 +25,7 @@ def encrypt(infile, outfile):
     output_file.write(token)
     input_file.close()
     output_file.close()
+    exit(0)
 
 
 def main():
