@@ -1,3 +1,4 @@
+import base64
 import sys
 from cryptography.fernet import Fernet
 
@@ -18,9 +19,11 @@ def encrypt(infile, outfile):
     input_file = open(infile, 'r')
     output_file = open(outfile, 'w')
     input_lines = input_file.read()
-    input_binary = bytes(input_lines, 'utf-8')
+    input_binary = bytes(input_lines, 'ascii')
     key_input = input("Enter the secret key: ")
-    f = Fernet(key_input)
+    key_binary = bytes(key_input, 'ascii')
+    key_b64 = base64.encode(key_binary)
+    f = Fernet(key_b64)
     token = f.encrypt(input_binary)
     output_file.write(token)
     input_file.close()
